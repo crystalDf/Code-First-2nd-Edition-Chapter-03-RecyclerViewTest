@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -19,11 +20,32 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder> 
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(
                 R.layout.fruit_item, parent, false);
-        ViewHolder holder = new ViewHolder(view);
+
+        final ViewHolder holder = new ViewHolder(view);
+
+        holder.mFruitView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = holder.getAdapterPosition();
+                Fruit fruit = mFruitList.get(position);
+                Toast.makeText(parent.getContext(), "view " + fruit.getName(), Toast.LENGTH_LONG)
+                        .show();
+            }
+        });
+
+        holder.mFruitImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = holder.getAdapterPosition();
+                Fruit fruit = mFruitList.get(position);
+                Toast.makeText(parent.getContext(), "image " + fruit.getName(), Toast.LENGTH_LONG)
+                        .show();
+            }
+        });
 
         return holder;
     }
@@ -44,11 +66,15 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder> 
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
+        private View mFruitView;
+
         private ImageView mFruitImage;
         private TextView mFruitName;
 
         public ViewHolder(View itemView) {
             super(itemView);
+
+            mFruitView = itemView;
 
             mFruitImage = (ImageView) itemView.findViewById(R.id.fruit_image);
             mFruitName = (TextView) itemView.findViewById(R.id.fruit_name);
