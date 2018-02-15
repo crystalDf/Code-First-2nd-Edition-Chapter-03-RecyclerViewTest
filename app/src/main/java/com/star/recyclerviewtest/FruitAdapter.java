@@ -27,24 +27,18 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder> 
 
         final ViewHolder holder = new ViewHolder(view);
 
-        holder.mFruitView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int position = holder.getAdapterPosition();
-                Fruit fruit = mFruitList.get(position);
-                Toast.makeText(parent.getContext(), "view " + fruit.getName(), Toast.LENGTH_LONG)
-                        .show();
-            }
+        holder.mFruitView.setOnClickListener(v -> {
+            int position = holder.getAdapterPosition();
+            Fruit fruit = mFruitList.get(position);
+            Toast.makeText(parent.getContext(), "view " + fruit.getName(), Toast.LENGTH_LONG)
+                    .show();
         });
 
-        holder.mFruitImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int position = holder.getAdapterPosition();
-                Fruit fruit = mFruitList.get(position);
-                Toast.makeText(parent.getContext(), "image " + fruit.getName(), Toast.LENGTH_LONG)
-                        .show();
-            }
+        holder.mFruitImage.setOnClickListener(v -> {
+            int position = holder.getAdapterPosition();
+            Fruit fruit = mFruitList.get(position);
+            Toast.makeText(parent.getContext(), "image " + fruit.getName(), Toast.LENGTH_LONG)
+                    .show();
         });
 
         return holder;
@@ -76,8 +70,8 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder> 
 
             mFruitView = itemView;
 
-            mFruitImage = (ImageView) itemView.findViewById(R.id.fruit_image);
-            mFruitName = (TextView) itemView.findViewById(R.id.fruit_name);
+            mFruitImage = itemView.findViewById(R.id.fruit_image);
+            mFruitName = itemView.findViewById(R.id.fruit_name);
         }
     }
 }
